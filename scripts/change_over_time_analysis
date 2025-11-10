@@ -1,0 +1,13 @@
+-- Change-Over-time (Trends)
+--Analyze how a measure evolves over time . 
+-- Helps track trends and identify seasonality in our data
+
+SELECT 
+datetrunc(month , order_date) as order_date,
+sum(sales_amount) AS total_sales,
+count(distinct customer_key) as total_customers ,
+sum(quantity) as total_quantity
+FROM gold.fact_sales
+WHERE order_date IS NOT NULL
+GROUP BY datetrunc(month , order_date) 
+ORDER BY datetrunc(month , order_date) 
